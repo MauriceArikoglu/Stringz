@@ -8,14 +8,19 @@
 import Foundation
 
 extension Notification.Name {
-  static let WatchFile = Self("stringz.notification.WatchFile")
-  static let UnwatchFile = Self("stringz.notification.UnwatchFile")
+  static let startWatchingFile = Self("stringz.notification.shouldWatchFile")
+  static let stopWatchingFile = Self("stringz.notification.shouldUnwatchFile")
 
-  static func saveFile(uuid: String) -> Notification.Name {
-    return Self("stringz.notification.SaveFile.\(uuid)")
+  static func shouldSaveFile(uuid: String) -> Notification.Name {
+    return Self("stringz.notification.shouldSaveFile.\(uuid)")
   }
-  static func reloadFile(uuid: String) -> Notification.Name {
-    return Self("stringz.notification.ReloadFile.\(uuid)")
+  
+  static func shouldAutosaveFile(uuid: String) -> Notification.Name {
+    return Self("stringz.notification.shouldAutoSaveFile.\(uuid)")
+  }
+  
+  static func shouldReloadFile(uuid: String) -> Notification.Name {
+    return Self("stringz.notification.shouldReloadFile.\(uuid)")
   }
 
   static let OpenProjectCount = Self("stringz.notification.OpenProjectCount")

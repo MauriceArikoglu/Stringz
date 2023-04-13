@@ -77,6 +77,11 @@ extension Localizable {
   func file(for language: Language) -> File? {
     return files.first { $0.language == language }
   }
+  
+  /// Returns the file that matches the given uuid
+  func file(by uuid: String) -> File? {
+    return files.first { $0.uuid == uuid }
+  }
 
   /// Returns all the supported languages in the current localizable.
   var languages: [Language] {
@@ -160,4 +165,15 @@ extension Array where Element == Localizable {
   func availableTypes(includeUnlocalized: Bool) -> [LocalizableType] {
     return LocalizableType.allCases.filter { self.filter(for: $0, includeUnlocalized: includeUnlocalized).count != 0 }
   }
+  
+  /// Returns a file array of localizables with the given localizable type.
+  func first(byFileUUID uuid: String) -> (localizable: Localizable, file: File)? {
+    return self.compactMap {
+      guard let file = $0.file(by: uuid)
+      else { return nil }
+      
+      return ($0, file)
+    }.first
+  }
+  
 }

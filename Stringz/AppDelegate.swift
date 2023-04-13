@@ -200,7 +200,10 @@ extension AppDelegate {
           break
 
         case NSApplication.ModalResponse.alertThirdButtonReturn:
-          unsavedWindows.forEach { ($0.windowController as? MainWindowController)?.saveAll() }
+          unsavedWindows.forEach {
+            ($0.windowController as? MainWindowController)?.saveAll()
+          }
+          
           self.continueQuitting(didClose: true)
           break
 
